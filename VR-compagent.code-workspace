@@ -1,14 +1,8 @@
 {
 	"folders": [
 		{
-			"name": "VR-compagent",
 			"path": "."
 		}
 	],
-	"settings": {},
-	"extensions": {
-		"recommendations": [
-			"github.remotehub"
-		]
-	}
+	"settings": {}
 }
