@@ -4,19 +4,5 @@
 			"path": "."
 		}
 	],
-	"settings": {
-		"twinny.ollamaApiPort": 1234,
-		"twinny.ollamaHostname": "127.0.0.1",
-		"twinny.githubToken": "github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",
-		"twinny.providerStorageLocation": "file",
-		"twinny.completionCacheEnabled": true,
-		"twinny.embeddingIgnoredGlobs": [
-			
-		]
-	},
-	"extensions": {
-		"recommendations": [
-			"rjmacarthy.twinny"
-		]
-	}
+	"settings": {}
 }

@@ -1,6 +1,6 @@
 Repo structure:
 
-ai-character-project/
+VR-compagent/
 ├── README.md                 # Project overview, goals, tech stack
 ├── plans/                   # 🗂️ Strategic docs for agents to follow
 │   ├── architecture.md      # High-level system design (Ollama + LangChain + Unity)
