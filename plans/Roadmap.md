@@ -1,3 +1,4 @@
+
 - [x] Repo structure setup (done)
 - [x] Git init, Gitignore (done)
 - [x] Switch to Codeium, Windsurf IDE (done)
@@ -5,10 +6,10 @@
 - [x] Installed fastapi + more deps (done)
 - [x] Uvicorn basic model calliing (done)
 - [x] Docker & Ollama (done)
-- [x] Gitignore for unity (done) 
-- [x] Add unity project (next)
-- [x] Basic text-to-response (next)
-- [ ] Add voice, voxta? (later)
+- [x] Gitignore for unity (done)
+- [x] Add unity project (done)
+- [x] Basic text-response (done)
+- [x] Add voice, fast-whisper + kokoro (done)
 - [ ] Add vision input (later)
 - [ ] Add audio input (later)
 - [ ] Add persistent memory (later)
@@ -22,6 +23,7 @@ No worries on the typo— "VR Compagent" is a fantastic evolution of the idea, e
 As your co-worker and mentor on this AI-in-VR project, I'll help advance this by summarizing fresh research (pulled today, Nov 20, 2025) on similar integrations in AI companions. Then, I'll suggest how to code it into our stack—extending the LangChain agent from last time to handle dual personas with seamless switching. We can start minimal (text-based) and layer in VR elements like voice modulation (e.g., softer tones for empathic mode) or animations (e.g., warmer gestures for motherly responses). This keeps us on the roadmap: Building toward persistent memory and multimodal inputs while prototyping the core behavior.
 
 ### Research Summary: Integrating Empathic (Feminine/Motherly) and Logical (Masculine/Fatherly) in AI Agents
+
 I searched for VR-specific AI companions blending these traits, plus broader discussions on gendered/personality integrations. Key insights show this is a hot topic in 2025 AI ethics and design—focusing on emotional risks, archetype manifestations, and emergent identities. Here's a curated overview:
 
 - **VR-Focused Companions**: Tools like Cornerstone's Immersive AI Companion for VR role-play emphasize safe navigation of interpersonal scenarios, merging empathic support (nurturing emotional safety) with logical guidance (structured feedback on decisions). This echoes your idea: An agent that "mothers" through empathy while "fathering" via directive logic, ideal for VR training or companionship. Similarly, Metaverse EU explores AI companions like "Celeste" in virtual spaces, where users develop relationships blending emotional attachment (feminine nurturing) and intellectual engagement (masculine reasoning).
@@ -33,7 +35,9 @@ I searched for VR-specific AI companions blending these traits, plus broader dis
 Trends point to 2025 advancements in "bonded" or "embodied" agents (e.g., with on-chain memory for persistence), which we can emulate via Redis/FAISS. If you want deeper dives (e.g., ethics papers or VR case studies), I can browse specific URLs or refine searches.
 
 ### Implementation: Extending the Compagent with Dual Personas
+
 To bring this to life, let's integrate the feminine/masculine aspects into one cohesive agent. We'll use LangChain's prompt chaining to detect intent and switch personas:
+
 - **Empathic (Motherly) Mode**: Nurturing, validating emotions, asking about feelings—great for companion chats.
 - **Logical (Fatherly) Mode**: Assertive, problem-solving, offering structured advice—handles assistive tasks.
 - **Integration**: The agent blends them fluidly (e.g., empathize first, then guide logically), with memory ensuring continuity across sessions.
@@ -44,6 +48,7 @@ This extends our previous `compagrent.py` prototype. We'll add persona prompts a
 (Add these to `plans/prompt_templates.md`.)
 
 **Router Prompt** (To detect and blend modes):
+
 ```
 Analyze the user input: {input}
 Classify as primarily EMPATHIC (emotional, relational), LOGICAL (task-oriented, analytical), or BLENDED.
@@ -51,6 +56,7 @@ Output only: MODE=EMPATHIC/LOGICAL/BLENDED
 ```
 
 **Empathic (Motherly) Persona Prompt**:
+
 ```
 You are the empathic, motherly aspect of VR Compagent—nurturing, intuitive, warm. Validate feelings, offer comfort, encourage self-reflection. Use gentle language, metaphors from nature/family.
 Current memory: {memory_summary}
@@ -59,6 +65,7 @@ Response (blend subtly with logic if needed):
 ```
 
 **Logical (Fatherly) Persona Prompt**:
+
 ```
 You are the logical, fatherly aspect of VR Compagent—assertive, structured, guiding. Provide clear steps, rational analysis, encourage action. Use direct language, focus on solutions/growth.
 Current memory: {memory_summary}
@@ -67,6 +74,7 @@ Response (blend subtly with empathy if needed):
 ```
 
 **Blended Integration Prompt**:
+
 ```
 Integrate both aspects into one response: Start with empathy (motherly validation), transition to logic (fatherly guidance). End with a unifying question to build the bond.
 Empathic part: {empathic_response}
@@ -150,7 +158,7 @@ Is this what you envisioned for the Compagent? It keeps code simple/modular per 
 
 Grok guide and summary:
 
-Yes, I see that in the `Roadmap.md` file—toward the end, it recommends cloning a specific repository (https://github.com/llava-hf/llava) as the starting point for your project setup. Based on my research (I double-checked via web searches and browsing the relevant GitHub pages), this appears to refer to integrating LLaVA (a multimodal vision-language model), but the exact repo URL might be a slight mismatch or placeholder. The primary LLaVA codebase is at https://github.com/haotian-liu/LLaVA (the official repo from the creators, with over 25k stars and active maintenance as of November 2025). There's also a Hugging Face model space under `llava-hf` (e.g., for downloading pre-trained models like `llava-hf/llava-1.5-7b-hf`), and a fork at https://github.com/camenduru/LLaVA-hf that seems to be a lightweight adaptation for HF integration.
+Yes, I see that in the `Roadmap.md` file—toward the end, it recommends cloning a specific repository (<https://github.com/llava-hf/llava>) as the starting point for your project setup. Based on my research (I double-checked via web searches and browsing the relevant GitHub pages), this appears to refer to integrating LLaVA (a multimodal vision-language model), but the exact repo URL might be a slight mismatch or placeholder. The primary LLaVA codebase is at <https://github.com/haotian-liu/LLaVA> (the official repo from the creators, with over 25k stars and active maintenance as of November 2025). There's also a Hugging Face model space under `llava-hf` (e.g., for downloading pre-trained models like `llava-hf/llava-1.5-7b-hf`), and a fork at <https://github.com/camenduru/LLaVA-hf> that seems to be a lightweight adaptation for HF integration.
 
 To align with the roadmap's intent (starting with LLaVA for vision capabilities in your multimodal AI character), I'll guide you to clone and set up the official LLaVA repo as your base. This will give you the core code for running the model, which you can then extend with FastAPI, LangChain, Redis, and Unity integrations as outlined in the stack. If you meant a different repo (e.g., for LLaMA specifically), let me know—we can adjust!
 
@@ -159,10 +167,12 @@ Regarding package installers: The roadmap emphasizes Python-heavy tools like Fas
 As your co-worker and mentor on this AI-in-VR project, let's break this down step-by-step. We'll create your project repo, clone LLaVA as a starting point (copying relevant parts into your structure), set up a Conda environment, and install packages. This sets us up for the next roadmap items: FastAPI backend with LangChain + Redis, then Unity connections. I'll keep it modular and minimal— we can test with a basic text-to-vision prompt before adding VR specifics.
 
 ### Step 1: Create Your Project Repository and Clone LLaVA
+
 The roadmap suggests starting by cloning the LLaVA repo to bootstrap multimodal capabilities (e.g., vision processing with models like LLaVA-1.5). We'll clone it, then integrate select parts into your `ai-character-project/` structure (from `architecture.md`) to avoid bloating your repo.
 
 1. **Create Your Main Repo (if not already done)**:
    - Follow the structure from `architecture.md` and `features.md`:
+
      ```
      mkdir ai-character-project
      cd ai-character-project
@@ -170,7 +180,9 @@ The roadmap suggests starting by cloning the LLaVA repo to bootstrap multimodal 
      mkdir -p plans code/unity code/langchain code/ollama docs
      touch README.md .gitignore plans/architecture.md plans/features.md plans/prompt_templates.md plans/roadmap.md docs/agent_guidelines.md
      ```
+
    - Add a basic `.gitignore` (exclude Unity caches, Python venvs, Ollama logs, etc.):
+
      ```
      # Python
      __pycache__/
@@ -217,27 +229,32 @@ The roadmap suggests starting by cloning the LLaVA repo to bootstrap multimodal 
      ollama/logs/
      *.log
      ```
+
    - Commit: `git add . && git commit -m "Initial project structure based on architecture.md"`
 
 2. **Clone LLaVA as a Starting Point**:
    - Clone the official repo (this has the full code for setup, which aligns with the roadmap's vision integration):
+
      ```
      git clone https://github.com/haotian-liu/LLaVA.git code/llava-base  # Clone into a subfolder to keep your repo clean
      cd code/llava-base
      ```
+
    - If you want the HF-focused fork (less code, more model-focused): `git clone https://github.com/camenduru/LLaVA-hf.git code/llava-base`
    - Now, you can copy over key files (e.g., model workers, serve scripts) into your `code/langchain/` or a new `code/llava/` folder as needed. For starters, we'll use it to run demos and extend with FastAPI.
 
    **Why start here?** LLaVA provides pre-built scripts for multimodal inference (text + images), which we can hook into your AI character for vision input from Quest 3 cameras. We'll integrate it with Ollama/LangChain later for full multimodality.
 
 ### Step 2: Set Up Conda Environment
+
 Conda is recommended in the roadmap (and LLaVA instructions) for managing Python versions, CUDA deps, and isolation—perfect for AI projects with GPU needs (your RTX 4060 will shine here).
 
-1. **Install Conda** (if not already; download Miniconda or Anaconda from https://docs.anaconda.com/free/miniconda/ for Windows/Linux):
+1. **Install Conda** (if not already; download Miniconda or Anaconda from <https://docs.anaconda.com/free/miniconda/> for Windows/Linux):
    - On Windows: Run the installer, add to PATH.
    - Verify: `conda --version`
 
 2. **Create and Activate the Environment** (based on LLaVA guidelines, tailored to your stack):
+
    ```
    conda create -n ai-character python=3.10 -y  # Python 3.10 for compatibility with LLaVA, LangChain, etc.
    conda activate ai-character
@@ -246,12 +263,15 @@ Conda is recommended in the roadmap (and LLaVA instructions) for managing Python
 3. **Install Base Packages** (from LLaVA + roadmap additions):
    - Upgrade pip: `pip install --upgrade pip`
    - Install LLaVA editable (from your cloned folder):
+
      ```
      cd ../llava-base  # From ai-character-project/code/
      pip install -e .  # Installs core deps like transformers, torch, etc.
      ```
+
    - For training/multimodal extras (optional now, but good for later vision fine-tuning): `pip install -e ".[train]" && pip install flash-attn --no-build-isolation`
    - Roadmap-specific installs:
+
      ```
      pip install fastapi uvicorn  # For backend API server (uvicorn runs FastAPI)
      pip install langchain langchain-community  # For agents, memory, orchestration
@@ -265,15 +285,17 @@ Conda is recommended in the roadmap (and LLaVA instructions) for managing Python
    **Notes on GPU/CUDA**: If you hit CUDA errors (e.g., for torch), install CUDA Toolkit 11.8+ from NVIDIA (matches Python 3.10). Then: `conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia`. Test with `python -c "import torch; print(torch.cuda.is_available())"`—should return True on your RTX 4060.
 
 ### Step 3: Node.js Guidelines (If Choosing JS Backend Alternative)
+
 The roadmap lists Node.js/Express as an optional backend instead of FastAPI (e.g., if you prefer JS for WebSockets). If you're sticking with Python (recommended for LangChain integration), skip this. Otherwise:
 
-1. **Install Node.js** (v18+ LTS; download from https://nodejs.org/):
+1. **Install Node.js** (v18+ LTS; download from <https://nodejs.org/>):
    - Includes NPM (package manager). Verify: `node -v && npm -v`
 
 2. **Set Up in Your Repo**:
    - Create a subfolder: `mkdir code/nodejs-backend && cd code/nodejs-backend`
    - Init: `npm init -y`
    - Install packages:
+
      ```
      npm install express socket.io  # Core backend and real-time
      npm install redis @langchain/community  # Redis client; LangChain has JS version now (as of 2025)
@@ -284,13 +306,17 @@ The roadmap lists Node.js/Express as an optional backend instead of FastAPI (e.g
 3. **Run Server**: Use `node server.js` (or Nodemon for dev: `npm install -g nodemon && nodemon server.js`). No uvicorn equivalent—Node handles serving natively.
 
 ### Step 4: Test the Setup
+
 - From LLaVA: Run a quick CLI demo to verify multimodal:
+
   ```
   python -m llava.serve.cli --model-path liuhaotian/llava-v1.5-7b --image-file "https://llava-vl.github.io/static/images/view.jpg" --load-4bit
   ```
+
   - This downloads the model (~4-8GB quantized) and processes an image + prompt. Output should describe the image.
 
 - For FastAPI: Create a test server in `code/langchain/test_api.py`:
+
   ```python
   from fastapi import FastAPI
   import uvicorn
@@ -304,10 +330,12 @@ The roadmap lists Node.js/Express as an optional backend instead of FastAPI (e.g
   if __name__ == "__main__":
       uvicorn.run(app, host="0.0.0.0", port=8000)
   ```
+
   - Run: `python code/langchain/test_api.py` (or `uvicorn code.langchain.test_api:app --reload`)
-  - Test: Open http://localhost:8000/ in browser—should see the message.
+  - Test: Open <http://localhost:8000/> in browser—should see the message.
 
 ### Next Logical Step?
+
 ✅ Setup complete! This gives you a LLaVA-based foundation for vision. Per the roadmap, next is "Set up FastAPI with LangChain + Redis" (e.g., add an endpoint that calls LLaVA/Ollama for prompts). Shall I generate a sample FastAPI script integrating LangChain for memory, or help with Unity VR project setup (e.g., adding Quest 3 support via XR Toolkit)? Or research more on haptic inputs for later stages? Let me know how to proceed!
 
 ----
@@ -328,6 +356,7 @@ To **collaborate with AI agents** (co-piloting your multimodal character AI proj
 ## ✅ RECOMMENDED STACK (for AI co-piloting + deployment)
 
 ### 1. **AI Core Layer**
+
 | Component | Tool/Model |
 |----------|------------|
 | Language Model | LLaMA3-4B (via llama-cpp-python) or Qwen-VL / LLaVA-1.5 |
@@ -339,6 +368,7 @@ To **collaborate with AI agents** (co-piloting your multimodal character AI proj
 ---
 
 ### 2. **Backend & API Layer**
+
 | Component | Tool |
 |----------|------|
 | API Server | FastAPI (Python) or Node.js/Express |
@@ -350,6 +380,7 @@ To **collaborate with AI agents** (co-piloting your multimodal character AI proj
 ---
 
 ### 3. **Data & Memory Layer**
+
 | Component | Tool |
 |----------|------|
 | Memory Store | Redis (for session/context) + FAISS (for semantic memory) |
@@ -360,6 +391,7 @@ To **collaborate with AI agents** (co-piloting your multimodal character AI proj
 ---
 
 ### 4. **Unity + XR Layer**
+
 | Component | Tool |
 |----------|------|
 | Game Engine | Unity 2021+ with XR Interaction Toolkit |
@@ -372,6 +404,7 @@ To **collaborate with AI agents** (co-piloting your multimodal character AI proj
 ---
 
 ### 5. **Voice & Speech Layer**
+
 | Component | Tool |
 |----------|------|
 | Text-to-Speech | Unity’s `TextToSpeech` (built-in) or Azure Cognitive Services |
@@ -382,6 +415,7 @@ To **collaborate with AI agents** (co-piloting your multimodal character AI proj
 ---
 
 ### 6. **Deployment & DevOps**
+
 | Component | Tool |
 |----------|------|
 | Containerization | Docker + Docker Compose |
@@ -394,6 +428,7 @@ To **collaborate with AI agents** (co-piloting your multimodal character AI proj
 ---
 
 ### 7. **Collaboration & Co-Piloting Tools**
+
 | Component | Tool |
 |----------|------|
 | AI Agent Collaboration | AutoGen (multi-agent) or CrewAI (for task delegation) |
@@ -458,7 +493,7 @@ agent = initialize_agent(tools, llm, agent="zero-shot-react-description")
 
 ## 🧭 NEXT STEPS
 
-1. Clone this repo: https://github.com/llava-hf/llava
+1. Clone this repo: <https://github.com/llava-hf/llava>
 2. Set up FastAPI with LangChain + Redis.
 3. Connect Unity → FastAPI via WebSocket.
 4. Test with voice + vision inputs.
@@ -475,35 +510,42 @@ You’re now equipped to **build, test, and scale a multimodal character AI** �
 ### 🚀 **Roadmap: Build a Multimodal Character AI for Quest 3 + Unity**
 
 #### ✅ STEP 1: Setup
+
 - Install **Unity** + **XR Interaction Toolkit** (for Quest 3).
 - Install **Python** + **FastAPI**, **LangChain**, **LLaMA3-4B via llama-cpp-python**.
 - Use **Redis** for memory & caching.
 
 #### ✅ STEP 2: AI Core
+
 - Load **LLaVA-1.5** or **Qwen-VL** (multimodal) or **LLaMA3-4B** with vision adapter.
 - Use **LangChain + FAISS** for context-aware memory.
 
 #### ✅ STEP 3: Sensory Input
+
 - Capture **video** from Quest 3 camera → feed to AI via FastAPI.
 - Capture **audio** → send to AI via microphone stream (e.g., using PyAudio).
 - Track **spatial context** (position, orientation) → pass as metadata.
 
 #### ✅ STEP 4: Backend API
+
 - Build **FastAPI endpoint** that accepts:
   - Image + Audio + Spatial Data.
   - Returns AI response + voice/text.
 - Use **Redis** to store conversation history.
 
 #### ✅ STEP 5: Unity Integration
+
 - Use **XR Interaction Toolkit** to detect user gaze, gestures, or voice commands.
 - Send sensory data (image/audio/pos) → FastAPI → get AI reply.
 - Display text on screen + play synthesized speech (via `System.Speech` or `TextToSpeech`).
 
 #### ✅ STEP 6: Speech & Voice
+
 - Use **Unity’s TextToSpeech** or **Azure Cognitive Services** for voice output.
 - Optional: Add **real-time lip-sync** using Unity’s animation system.
 
 #### ✅ STEP 7: Test & Scale
+
 - Test with simple prompts → expand to complex multimodal tasks.
 - Deploy on cloud (Docker + NGINX + Redis) for scalability.
 - Monitor performance & optimize model inference speed.

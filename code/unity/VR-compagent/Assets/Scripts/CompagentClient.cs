@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Text;
+using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -26,12 +27,23 @@ public class SttResponse
     public string language;
 }
 
+[System.Serializable]
+public class TtsResponse
+{
+    public string audio;      // base64-encoded WAV data
+    public int sample_rate;
+}
+
 public class CompagentClient : MonoBehaviour
 {
     [SerializeField] private InputField inputField;   // must be InputField
     [SerializeField] private Text responseText;       // must be Text
     [SerializeField] private string apiUrl = "http://localhost:8000/compagent";
     [SerializeField] private string sttUrl = "http://localhost:8001/stt";
+    [SerializeField] private string ttsUrl = "http://localhost:8002/tts";
+
+    [Header("TTS Playback")]
+    [SerializeField] private AudioSource ttsAudioSource;
 
     [Header("Voice Recording")]
     [SerializeField] private int sampleRate = 16000;
@@ -72,12 +84,19 @@ public class CompagentClient : MonoBehaviour
         string responseJson = request.downloadHandler.text;
         var data = JsonUtility.FromJson<CompagentResponse>(responseJson);
 
+        string replyText = data != null && !string.IsNullOrEmpty(data.response)
+            ? data.response
+            : responseJson;
+
         if (responseText != null)
         {
-            responseText.text =
-                data != null && !string.IsNullOrEmpty(data.response)
-                    ? data.response
-                    : responseJson;
+            responseText.text = replyText;
+        }
+
+        // If this was a voice-channel request, optionally trigger TTS playback
+        if (channel == "voice" && !string.IsNullOrEmpty(replyText))
+        {
+            yield return StartCoroutine(RequestTtsAndPlay(replyText));
         }
     }
 
@@ -200,5 +219,96 @@ public class CompagentClient : MonoBehaviour
         }
 
         return bytes;
+    }
+
+    // --- TTS helpers ---
+
+    private IEnumerator RequestTtsAndPlay(string text)
+    {
+        if (string.IsNullOrWhiteSpace(ttsUrl) || ttsAudioSource == null)
+            yield break;
+
+        var payload = new { text = text, voice = "default" };
+        string json = JsonUtility.ToJson(payload);
+
+        var request = new UnityWebRequest(ttsUrl, UnityWebRequest.kHttpVerbPOST);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            if (responseText != null)
+                responseText.text = "TTS Error: " + request.error;
+            yield break;
+        }
+
+        string ttsJson = request.downloadHandler.text;
+        var tts = JsonUtility.FromJson<TtsResponse>(ttsJson);
+        if (tts == null || string.IsNullOrEmpty(tts.audio))
+            yield break;
+
+        byte[] wavBytes;
+        try
+        {
+            wavBytes = Convert.FromBase64String(tts.audio);
+        }
+        catch (Exception)
+        {
+            yield break;
+        }
+
+        var clip = WavBytesToAudioClip(wavBytes, "tts_clip");
+        if (clip != null)
+        {
+            ttsAudioSource.clip = clip;
+            ttsAudioSource.Play();
+        }
+    }
+
+    private AudioClip WavBytesToAudioClip(byte[] wavBytes, string clipName)
+    {
+        if (wavBytes == null || wavBytes.Length < 44)
+            return null;
+
+        // Parse minimal WAV header (PCM 16-bit mono)
+        int channels = BitConverter.ToInt16(wavBytes, 22);
+        int sampleRateFromFile = BitConverter.ToInt32(wavBytes, 24);
+        int bitsPerSample = BitConverter.ToInt16(wavBytes, 34);
+
+        // Find "data" chunk
+        int pos = 12;
+        while (!(wavBytes[pos] == 'd' && wavBytes[pos + 1] == 'a' && wavBytes[pos + 2] == 't' && wavBytes[pos + 3] == 'a'))
+        {
+            pos += 4;
+            int chunkSize = BitConverter.ToInt32(wavBytes, pos);
+            pos += 4 + chunkSize;
+            if (pos >= wavBytes.Length - 8)
+                return null;
+        }
+
+        pos += 4; // skip "data"
+        int dataSize = BitConverter.ToInt32(wavBytes, pos);
+        pos += 4;
+
+        int sampleCount = dataSize / (bitsPerSample / 8);
+        float[] samples = new float[sampleCount];
+
+        int byteIndex = pos;
+        for (int i = 0; i < sampleCount && byteIndex + 1 < wavBytes.Length; i++)
+        {
+            short sample = BitConverter.ToInt16(wavBytes, byteIndex);
+            samples[i] = sample / 32768f;
+            byteIndex += 2;
+        }
+
+        int unityChannels = Mathf.Max(1, channels);
+        int unitySampleRate = sampleRateFromFile > 0 ? sampleRateFromFile : sampleRate;
+        var clip = AudioClip.Create(clipName, sampleCount / unityChannels, unityChannels, unitySampleRate, false);
+        clip.SetData(samples, 0);
+        return clip;
     }
 }
