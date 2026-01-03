@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://nnse6wsxsjeo" path="res://scenes/pointer_demo/objects/display.tscn" id="20_jknhv"]
 [ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://addons/godot-xr-tools/objects/virtual_keyboard.tscn" id="21_yhf2w"]
 [ext_resource type="PackedScene" uid="uid://bk34216s7eynw" path="res://scenes/pointer_demo/objects/color_change_cube.tscn" id="22_dgiqe"]
-[ext_resource type="PackedScene" uid="uid://c4kdu3l7tt6l8" path="res://vrm_samples/handpicked/Blond girl.vrm" id="23_5e3e0"]
+[ext_resource type="PackedScene" path="res://vrm_samples/handpicked/Blond girl.vrm" id="23_5e3e0"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l51uo"]
 animation = &"Grip"
