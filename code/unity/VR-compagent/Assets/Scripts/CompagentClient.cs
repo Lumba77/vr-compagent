@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class CompagentRequest
@@ -36,8 +37,8 @@ public class TtsResponse
 
 public class CompagentClient : MonoBehaviour
 {
-    [SerializeField] private InputField inputField;   // must be InputField
-    [SerializeField] private Text responseText;       // must be Text
+    [SerializeField] private TMP_InputField inputField;   // TextMeshPro input
+    [SerializeField] private TMP_Text responseText;       // TextMeshPro text
     [SerializeField] private string apiUrl = "http://localhost:8000/compagent";
     [SerializeField] private string sttUrl = "http://localhost:8001/stt";
     [SerializeField] private string ttsUrl = "http://localhost:8002/tts";

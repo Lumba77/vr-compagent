@@ -1,0 +1,89 @@
+[gd_scene load_steps=2 format=3 uid="uid://cge2ou48mud7b"]
+
+[ext_resource type="Script" path="res://scenes/pointer_demo/objects/keyboard_test_screen.gd" id="1"]
+
+[node name="KeyboardTestScreen" type="Node2D"]
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1124.0
+offset_bottom = 776.0
+color = Color(0.247059, 0.247059, 0.247059, 1)
+
+[node name="Container" type="VBoxContainer" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1104.0
+offset_bottom = 756.0
+
+[node name="Header" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 13
+text = "Chat"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Toggles" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="TTS" type="CheckButton" parent="Container/Toggles"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "TTS"
+
+[node name="STT" type="CheckButton" parent="Container/Toggles"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "STT"
+
+[node name="Image" type="CheckButton" parent="Container/Toggles"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Image"
+
+[node name="ChatScroll" type="ScrollContainer" parent="Container"]
+custom_minimum_size = Vector2(0, 520)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="ChatLog" type="TextEdit" parent="Container/ChatScroll"]
+custom_minimum_size = Vector2(0, 520)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 12
+text = ""
+editable = false
+context_menu_enabled = false
+wrap_mode = 1
+
+[node name="Prompt" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Input" type="LineEdit" parent="Container/Prompt"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="SendButton" type="Button" parent="Container/Prompt"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Send"
+
+[node name="ClearButton" type="Button" parent="Container/Prompt"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Clear"
+
+[connection signal="pressed" from="Container/Prompt/ClearButton" to="." method="_on_ClearButton_pressed"]
+[connection signal="pressed" from="Container/Prompt/SendButton" to="." method="_on_SendButton_pressed"]
+[connection signal="text_submitted" from="Container/Prompt/Input" to="." method="_on_Input_text_submitted"]

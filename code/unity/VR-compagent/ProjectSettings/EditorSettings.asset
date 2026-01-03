@@ -7,8 +7,8 @@ EditorSettings:
   m_SerializationMode: 2
   m_LineEndingsForNewScripts: 2
   m_DefaultBehaviorMode: 0
-  m_PrefabRegularEnvironment: {fileID: 0}
-  m_PrefabUIEnvironment: {fileID: 0}
+  m_PrefabRegularEnvironment: {fileID: 102900000, guid: 9a93fe1c1495ed44ba5906429777aea8, type: 3}
+  m_PrefabUIEnvironment: {fileID: 102900000, guid: 2ac8cf212df6445e8aebbe3cb832e993, type: 3}
   m_SpritePackerMode: 0
   m_SpritePackerCacheSize: 10
   m_SpritePackerPaddingPower: 1
@@ -24,7 +24,7 @@ EditorSettings:
   m_EnableEditorAsyncCPUTextureLoading: 0
   m_AsyncShaderCompilation: 1
   m_PrefabModeAllowAutoSave: 1
-  m_EnterPlayModeOptionsEnabled: 1
+  m_EnterPlayModeOptionsEnabled: 0
   m_EnterPlayModeOptions: 3
   m_GameObjectNamingDigits: 1
   m_GameObjectNamingScheme: 0

@@ -5,6 +5,8 @@ from ollama import Client
 
 client = Client(host="http://localhost:11434")
 
+MODEL = "huihui_ai/qwen3-vl-abliterated:4b"
+
 # Simple in-process chat history for basic memory behavior
 chat_history: list[dict] = []
 
@@ -26,7 +28,7 @@ def route_mode(user_input: str) -> str:
         "Given the user input, decide which mode is most appropriate: EMPATHIC, LOGICAL, or BLENDED. "
         "Respond strictly in the format MODE=EMPATHIC, MODE=LOGICAL, or MODE=BLENDED."
     )
-    result = call_ollama("qwen3-vl:2b", system_prompt, f"Input: {user_input}")
+    result = call_ollama(MODEL, system_prompt, f"Input: {user_input}")
     mode = result.strip().split("=")[-1].strip().upper()
     if mode not in {"EMPATHIC", "LOGICAL", "BLENDED"}:
         mode = "BLENDED"
@@ -39,12 +41,13 @@ def run_empathic(memory_summary: str, user_input: str) -> str:
         "Validate feelings, offer comfort, and encourage self-reflection. "
         "Blend in gentle, grounded reasoning when helpful."
     )
+
     user_prompt = (
         f"Memory summary:\n{memory_summary}\n\n"
         f"User: {user_input}\n"
         "Respond as the empathic persona."
     )
-    return call_ollama("qwen3-vl:2b", system_prompt, user_prompt)
+    return call_ollama(MODEL, system_prompt, user_prompt)
 
 
 def run_logical(memory_summary: str, user_input: str) -> str:
@@ -52,17 +55,19 @@ def run_logical(memory_summary: str, user_input: str) -> str:
         "You are the logical aspect of VR Compagent—assertive, structured, and guiding. "
         "Provide clear steps, rational analysis, and encourage action, while staying kind."
     )
+
     user_prompt = (
         f"Memory summary:\n{memory_summary}\n\n"
         f"User: {user_input}\n"
         "Respond as the logical persona."
     )
-    return call_ollama("qwen3-vl:2b", system_prompt, user_prompt)
+    return call_ollama(MODEL, system_prompt, user_prompt)
 
 
 def run_blended(memory_summary: str, user_input: str) -> str:
     empathic_resp = run_empathic(memory_summary, user_input)
     logical_resp = run_logical(memory_summary, user_input)
+
     system_prompt = (
         "You integrate VR Compagent's empathic (motherly) and logical (fatherly) aspects. "
         "Start with empathy, then offer clear, structured guidance. "
@@ -73,7 +78,7 @@ def run_blended(memory_summary: str, user_input: str) -> str:
         f"Logical draft:\n{logical_resp}\n\n"
         "Now write a single, coherent final response that blends both."
     )
-    return call_ollama("qwen3-vl:2b", system_prompt, user_prompt)
+    return call_ollama(MODEL, system_prompt, user_prompt)
 
 
 app = FastAPI()

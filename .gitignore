@@ -216,6 +216,25 @@ __marimo__/
 UserSettings/
 MemoryCaptures/
 
+# Unity optional sample/demo content (keep repo lean)
+
+code/unity/VR-compagent/Assets/Samples/
+code/unity/VR-compagent/Assets/TextMesh Pro/Examples & Extras/
+
+# Godot
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+*.translation
+
+# Godot Mono (C#)
+.mono/
+
+# Godot addons cache (some addons create local caches)
+addons/**/.cache/
+addons/**/cache/
+
 # IDE / project files
 *.csproj
 *.unityproj

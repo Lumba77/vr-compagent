@@ -1,3 +1,22 @@
+
+
+> big-agi@2.0.1 dev
+> next dev --turbopack
+
+ 🧠 big-AGI v2.0.1 (@8a570e912)
+ ⚠ Port 3000 is in use by process 21296, using available port 3001 instead.
+ 🧠 big-AGI v2.0.1 (@8a570e912)
+   ▲ Next.js 15.5.7 (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.8.100:3001
+
+ ✓ Starting...
+ ✓ Ready in 1558ms
+ ⚠ Webpack is configured while Turbopack is not, which may cause problems.
+ ⚠ See instructions if you need to configure Turbopack:
+  https://nextjs.org/docs/app/api-reference/next-config-js/turbopack
+
+
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import JSONResponse
 from faster_whisper import WhisperModel
@@ -10,7 +29,7 @@ from typing import Optional
 # Configure model
 # You can change "small" to "base", "medium", etc. depending on speed/quality trade-offs.
 MODEL_SIZE = "tiny"
-DEVICE = "cpu"  # "cuda" | "cpu" | "auto"
+DEVICE = "cuda"  # "cuda" | "cpu" | "auto"
 
 
 app = FastAPI()
