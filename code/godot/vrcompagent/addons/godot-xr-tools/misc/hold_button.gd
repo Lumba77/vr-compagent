@@ -56,11 +56,11 @@ func _process(delta):
 
 	# we check all trackers
 	var controllers = XRServer.get_trackers(XRServer.TRACKER_CONTROLLER)
-	for name in controllers:
-		var tracker : XRPositionalTracker = controllers[name]
+	for tracker_name in controllers:
+		var tracker : XRPositionalTracker = controllers[tracker_name]
 		if tracker.get_input(activate_action):
 			button_pressed = true
-
+			break
 
 	if !xr_start_node.is_xr_active():
 		if Input.is_action_pressed("ui_accept") or Input.is_action_pressed(activate_action_desktop):

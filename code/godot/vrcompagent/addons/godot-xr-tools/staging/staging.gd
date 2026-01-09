@@ -239,7 +239,10 @@ func load_scene(p_scene_path : String, user_data = null) -> void:
 	var new_scene : PackedScene = ResourceLoader.load_threaded_get(p_scene_path)
 
 	# Setup our new scene
-	current_scene = new_scene.instantiate()
+	current_scene = new_scene.instantiate() as XRToolsSceneBase
+	if not current_scene:
+		push_error("Loaded scene is not an XRToolsSceneBase: ", p_scene_path)
+		return
 	current_scene_path = p_scene_path
 	$Scene.add_child(current_scene)
 	_add_signals(current_scene)

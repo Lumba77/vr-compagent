@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Godot XR Tools Demo"
+config/name="vr-compagent xr"
 run/main_scene="res://demo_staging.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
@@ -26,7 +26,7 @@ project/assembly_name="Godot XR Tools Demo"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/vrm/plugin.cfg")
+enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/mixamo_animation_retargeter/plugin.cfg", "res://addons/vrm/plugin.cfg")
 
 [filesystem]
 
@@ -58,6 +58,11 @@ trigger_left={
 ]
 }
 
+[input_devices]
+
+pointing/emulate_mouse_from_touch=false
+pointing/android/enable_long_press_as_right_click=true
+
 [layer_names]
 
 3d_physics/layer_1="Static World"
@@ -85,6 +90,5 @@ limits/time/time_rollover_secs=30.0
 [xr]
 
 openxr/enabled=true
-openxr/foveation_level=3
-openxr/foveation_dynamic=true
+openxr/foveation_level=0
 shaders/enabled=true

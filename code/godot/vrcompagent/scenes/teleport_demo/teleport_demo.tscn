@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://deyk5frilshws" path="res://assets/meshes/control_pad/control_pad_location_right.tscn" id="9_5ab7n"]
 [ext_resource type="PackedScene" uid="uid://ct3p5sgwvkmva" path="res://assets/meshes/control_pad/control_pad.tscn" id="11_xdv53"]
 [ext_resource type="PackedScene" uid="uid://bwkv3q0fvapaq" path="res://scenes/teleport_demo/objects/teleport_area_start.tscn" id="18_jaum3"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/objects/teleport_area.gd" id="19_ir3h8"]
+[ext_resource type="Script" path="res://assets/objects/teleport_area.gd" id="19_ir3h8"]
 [ext_resource type="PackedScene" uid="uid://2j2ufl3svgcl" path="res://scenes/teleport_demo/objects/teleport_area_end.tscn" id="20_r3e3h"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o1482"]

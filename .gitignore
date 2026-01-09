@@ -247,3 +247,18 @@ addons/**/cache/
 # OS / editor noise
 .DS_Store
 Thumbs.db
+
+code/godot/vrcompagent/assets/Fbx/Animated/**
+code/godot/vrcompagent/assets/Fbx/Exported/**
+code/godot/vrcompagent/assets/Fbx/**/fbx.zip
+code/godot/vrcompagent/assets/Fbx/**/fbx_*.zip
+code/godot/vrcompagent/assets/Fbx/**/*.fbx
+code/godot/vrcompagent/assets/Fbx/**/*.FBX
+code/godot/vrcompagent/assets/Fbx/**/*.Fbx
+code/godot/vrcompagent/assets/Fbx/**/*.fbx.import
+code/godot/vrcompagent/assets/Fbx/**/*.FBX.import
+code/godot/vrcompagent/assets/Fbx/**/*.Fbx.import
+code/godot/vrcompagent/assets/Fbx/**/*.res
+
+# OpenMemory - IDE/Assistant specific rules
+.windsurf\rules\openmemory.md

@@ -32,7 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://chww0na0ryl1m" path="res://scenes/pickable_demo/objects/teacup.tscn" id="16_v5unt"]
 [ext_resource type="PackedScene" uid="uid://de0guxhrn5ouk" path="res://scenes/pickable_demo/objects/hammer.tscn" id="17"]
 [ext_resource type="PackedScene" uid="uid://bxk2dud5pq1uf" path="res://scenes/pickable_demo/objects/knife.tscn" id="19_6grml"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/objects/return_to_snap_zone.gd" id="19_iqmkd"]
+[ext_resource type="Script" path="res://assets/objects/return_to_snap_zone.gd" id="19_iqmkd"]
 [ext_resource type="PackedScene" uid="uid://bmjemjgtnpkpo" path="res://assets/3dmodelscc0/models/scenes/sniper_rifle.tscn" id="25_xgu4l"]
 [ext_resource type="PackedScene" uid="uid://deuxld12hxsq0" path="res://scenes/pickable_demo/objects/picatinny_scope.tscn" id="26_x40vw"]
 

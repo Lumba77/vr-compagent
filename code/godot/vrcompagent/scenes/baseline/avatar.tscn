@@ -1,9 +1,10 @@
-[gd_scene load_steps=73 format=3 uid="uid://ctdxgg62vs8ub"]
+[gd_scene load_steps=74 format=3 uid="uid://ctdxgg62vs8ub"]
 
 [ext_resource type="PackedScene" uid="uid://wk3rpp47u2y5" path="res://vrm_samples/handpicked/Blond girl.vrm" id="1_gelfh"]
 [ext_resource type="Script" path="res://addons/vrm/vrm_spring_bone.gd" id="2_fa8tx"]
 [ext_resource type="Script" path="res://addons/vrm/vrm_collider.gd" id="3_si2ns"]
 [ext_resource type="Script" path="res://addons/vrm/vrm_collider_group.gd" id="4_d4qj4"]
+[ext_resource type="Script" path="res://scenes/baseline/avatar_body_animation_player.gd" id="5_3a0bq"]
 
 [sub_resource type="Resource" id="Resource_jjjxf"]
 resource_name = "Bust"
@@ -904,3 +905,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02452e-09, 1.24265, -0.018
 [node name="secondary" parent="." index="1"]
 collider_groups = Array[ExtResource("4_d4qj4")]([SubResource("Resource_be5jq"), SubResource("Resource_eungu"), SubResource("Resource_d43ut"), SubResource("Resource_xdx5b"), SubResource("Resource_o1aly"), SubResource("Resource_1o6gh"), SubResource("Resource_0a580"), SubResource("Resource_sky5t"), SubResource("Resource_w51yu"), SubResource("Resource_o3ten"), SubResource("Resource_yf6n5"), SubResource("Resource_2mfu1")])
 collider_library = Array[ExtResource("3_si2ns")]([SubResource("Resource_yjgbg"), SubResource("Resource_ibq04"), SubResource("Resource_b7rya"), SubResource("Resource_ah3tp"), SubResource("Resource_pwnvj"), SubResource("Resource_a270g"), SubResource("Resource_tt5fl"), SubResource("Resource_uf7yd"), SubResource("Resource_yl2fy"), SubResource("Resource_iwlos"), SubResource("Resource_t6qpr"), SubResource("Resource_b6hi4"), SubResource("Resource_m8cgj"), SubResource("Resource_phi48"), SubResource("Resource_1egpc"), SubResource("Resource_1a236"), SubResource("Resource_wm5b0"), SubResource("Resource_2hgr1"), SubResource("Resource_qkr6c"), SubResource("Resource_barjy"), SubResource("Resource_4k8p1"), SubResource("Resource_mfbp0"), SubResource("Resource_lqiev"), SubResource("Resource_yv6il"), SubResource("Resource_27pls"), SubResource("Resource_uefcs"), SubResource("Resource_wehkl"), SubResource("Resource_ey32g")])
+
+[node name="BodyAnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+script = ExtResource("5_3a0bq")

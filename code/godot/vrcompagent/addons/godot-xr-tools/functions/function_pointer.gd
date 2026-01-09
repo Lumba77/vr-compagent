@@ -425,8 +425,12 @@ func _button_pressed() -> void:
 # Pointer-activation button released handler
 func _button_released() -> void:
 	if target:
-		# Report release
-		XRToolsPointerEvent.released(self, target, last_collided_at)
+		# The target may have been freed between press and release (common if the
+		# interactable queues itself free during the pressed handler). Guard against
+		# passing a previously freed instance into XRToolsPointerEvent.
+		if is_instance_valid(target) and (target is Node):
+			# Report release
+			XRToolsPointerEvent.released(self, target, last_collided_at)
 		target = null
 		last_collided_at = Vector3(0, 0, 0)
 

@@ -60,6 +60,14 @@ var _webxr_session_query : bool = false
 
 # Handle auto-initialization when ready
 func _ready() -> void:
+	# Passthrough requires the main/root viewport to be transparent, and some runtimes
+	# validate this very early during XR init. Set it up-front to avoid warnings.
+	if enable_passthrough:
+		var vp := get_xr_viewport()
+		if vp:
+			vp.transparent_bg = true
+		if get_tree() and get_tree().root:
+			get_tree().root.transparent_bg = true
 	if !Engine.is_editor_hint():
 		_initialize()
 
@@ -149,6 +157,10 @@ func _setup_for_openxr() -> bool:
 
 	# Switch the viewport to XR
 	get_xr_viewport().transparent_bg = enable_passthrough
+	# Some runtimes check the main/root viewport specifically for transparency.
+	# Force it on when passthrough is enabled so passthrough can properly render.
+	if get_tree() and get_tree().root:
+		get_tree().root.transparent_bg = enable_passthrough
 	get_xr_viewport().use_xr = true
 
 	# Report success
@@ -197,6 +209,8 @@ func _set_enable_passthrough(p_new_value : bool) -> void:
 
 		# Update transparent background
 		get_xr_viewport().transparent_bg = enable_passthrough
+		if get_tree() and get_tree().root:
+			get_tree().root.transparent_bg = enable_passthrough
 
 
 # Perform WebXR setup

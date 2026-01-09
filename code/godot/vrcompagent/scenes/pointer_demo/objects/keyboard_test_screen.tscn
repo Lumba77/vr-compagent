@@ -8,7 +8,7 @@ script = ExtResource("1")
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1124.0
 offset_bottom = 776.0
-color = Color(0.247059, 0.247059, 0.247059, 1)
+color = Color(0.92, 0.95, 1, 0.62)
 
 [node name="Container" type="VBoxContainer" parent="."]
 offset_left = 10.0
@@ -25,9 +25,22 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Chat"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="ImmersiveSetupButton" type="Button" parent="Container/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Immersive Setup"
+
+[node name="SettingsButton" type="Button" parent="Container/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Settings"
 
 [node name="Toggles" type="HBoxContainer" parent="Container"]
 layout_mode = 2
@@ -35,16 +48,19 @@ layout_mode = 2
 [node name="TTS" type="CheckButton" parent="Container/Toggles"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "TTS"
 
 [node name="STT" type="CheckButton" parent="Container/Toggles"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "STT"
 
 [node name="Image" type="CheckButton" parent="Container/Toggles"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Image"
 
 [node name="ChatScroll" type="ScrollContainer" parent="Container"]
@@ -61,6 +77,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
 text = ""
 editable = false
 context_menu_enabled = false
@@ -73,17 +91,171 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="SendButton" type="Button" parent="Container/Prompt"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Send"
 
 [node name="ClearButton" type="Button" parent="Container/Prompt"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Clear"
 
+[node name="SettingsPanel" type="PanelContainer" parent="."]
+visible = false
+offset_left = 40.0
+offset_top = 50.0
+offset_right = 1084.0
+offset_bottom = 726.0
+
+[node name="VBox" type="VBoxContainer" parent="SettingsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="Title" type="Label" parent="SettingsPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Settings"
+
+[node name="UsernameLabel" type="Label" parent="SettingsPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Username (what the AI calls you)"
+
+[node name="Username" type="LineEdit" parent="SettingsPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="InstructionLabel" type="Label" parent="SettingsPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "AI instruction prompt"
+
+[node name="Instruction" type="TextEdit" parent="SettingsPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 360)
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+wrap_mode = 1
+
+[node name="AdvancedToggle" type="Button" parent="SettingsPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Show Advanced"
+
+[node name="AdvancedContainer" type="VBoxContainer" parent="SettingsPanel/VBox"]
+visible = false
+layout_mode = 2
+
+[node name="MemoryLabel" type="Label" parent="SettingsPanel/VBox/AdvancedContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Memory Bank (Advanced)"
+
+[node name="MemoryList" type="ItemList" parent="SettingsPanel/VBox/AdvancedContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+size_flags_vertical = 3
+
+[node name="MemoryButtons" type="HBoxContainer" parent="SettingsPanel/VBox/AdvancedContainer"]
+layout_mode = 2
+
+[node name="AddMemoryButton" type="Button" parent="SettingsPanel/VBox/AdvancedContainer/MemoryButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Add"
+
+[node name="EditMemoryButton" type="Button" parent="SettingsPanel/VBox/AdvancedContainer/MemoryButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Edit"
+
+[node name="DeleteMemoryButton" type="Button" parent="SettingsPanel/VBox/AdvancedContainer/MemoryButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Delete"
+
+[node name="MemoryEditor" type="PanelContainer" parent="SettingsPanel/VBox/AdvancedContainer"]
+visible = false
+layout_mode = 2
+
+[node name="EditorVBox" type="VBoxContainer" parent="SettingsPanel/VBox/AdvancedContainer/MemoryEditor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="MemoryEdit" type="TextEdit" parent="SettingsPanel/VBox/AdvancedContainer/MemoryEditor/EditorVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 90)
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+wrap_mode = 1
+
+[node name="EditorButtons" type="HBoxContainer" parent="SettingsPanel/VBox/AdvancedContainer/MemoryEditor/EditorVBox"]
+layout_mode = 2
+
+[node name="SaveMemoryButton" type="Button" parent="SettingsPanel/VBox/AdvancedContainer/MemoryEditor/EditorVBox/EditorButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Save Memory"
+
+[node name="CancelMemoryButton" type="Button" parent="SettingsPanel/VBox/AdvancedContainer/MemoryEditor/EditorVBox/EditorButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Cancel"
+
+[node name="Buttons" type="HBoxContainer" parent="SettingsPanel/VBox"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="SettingsPanel/VBox/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Save"
+
+[node name="CloseButton" type="Button" parent="SettingsPanel/VBox/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Close"
+
 [connection signal="pressed" from="Container/Prompt/ClearButton" to="." method="_on_ClearButton_pressed"]
+[connection signal="pressed" from="Container/Header/ImmersiveSetupButton" to="." method="_on_ImmersiveSetupButton_pressed"]
+[connection signal="pressed" from="Container/Header/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="Container/Prompt/SendButton" to="." method="_on_SendButton_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBox/Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBox/Buttons/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBox/AdvancedToggle" to="." method="_on_AdvancedToggle_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBox/AdvancedContainer/MemoryButtons/AddMemoryButton" to="." method="_on_AddMemoryButton_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBox/AdvancedContainer/MemoryButtons/EditMemoryButton" to="." method="_on_EditMemoryButton_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBox/AdvancedContainer/MemoryButtons/DeleteMemoryButton" to="." method="_on_DeleteMemoryButton_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBox/AdvancedContainer/MemoryEditor/EditorVBox/EditorButtons/SaveMemoryButton" to="." method="_on_SaveMemoryButton_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBox/AdvancedContainer/MemoryEditor/EditorVBox/EditorButtons/CancelMemoryButton" to="." method="_on_CancelMemoryButton_pressed"]
 [connection signal="text_submitted" from="Container/Prompt/Input" to="." method="_on_Input_text_submitted"]

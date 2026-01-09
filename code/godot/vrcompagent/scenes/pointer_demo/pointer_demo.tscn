@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://deyk5frilshws" path="res://assets/meshes/control_pad/control_pad_location_right.tscn" id="9_qbaa8"]
 [ext_resource type="Material" uid="uid://djwuqg7105fg" path="res://scenes/pointer_demo/objects/pointer_target_material.tres" id="10_fxi5i"]
 [ext_resource type="PackedScene" uid="uid://ca6c2h3xsflxf" path="res://assets/maps/holodeck_map.tscn" id="10_qlbta"]
-[ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://addons/godot-xr-tools/objects/virtual_keyboard.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://assets/objects/virtual_keyboard.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://nnse6wsxsjeo" path="res://scenes/pointer_demo/objects/display.tscn" id="12"]
 [ext_resource type="PackedScene" uid="uid://ct3p5sgwvkmva" path="res://assets/meshes/control_pad/control_pad.tscn" id="12_yae1p"]
 [ext_resource type="PackedScene" uid="uid://bk34216s7eynw" path="res://scenes/pointer_demo/objects/color_change_cube.tscn" id="15"]

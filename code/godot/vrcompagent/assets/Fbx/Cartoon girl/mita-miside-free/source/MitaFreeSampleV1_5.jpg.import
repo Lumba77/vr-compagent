@@ -1,0 +1,39 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cnts2xft5a0u8"
+path.s3tc="res://.godot/imported/MitaFreeSampleV1_5.jpg-41c5c90eb7403585db74c0e64798908c.s3tc.ctex"
+path.etc2="res://.godot/imported/MitaFreeSampleV1_5.jpg-41c5c90eb7403585db74c0e64798908c.etc2.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "38292dc3bf048715c114a81f5d02d6c6"
+}
+
+[deps]
+
+source_file="res://assets/Fbx/Cartoon girl/mita-miside-free/source/MitaFreeSampleV1_5.jpg"
+dest_files=["res://.godot/imported/MitaFreeSampleV1_5.jpg-41c5c90eb7403585db74c0e64798908c.s3tc.ctex", "res://.godot/imported/MitaFreeSampleV1_5.jpg-41c5c90eb7403585db74c0e64798908c.etc2.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://assets/Fbx/Cartoon girl/mita-miside-free/source/MitaFreeSampleV1_5.jpg"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

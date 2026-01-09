@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://nnse6wsxsjeo"]
 
-[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://assets/objects/viewport_2d_in_3d.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://cge2ou48mud7b" path="res://scenes/pointer_demo/objects/keyboard_test_screen.tscn" id="2"]
 
 [sub_resource type="QuadMesh" id="1"]
@@ -8,7 +8,7 @@ resource_local_to_scene = true
 size = Vector2(2.8, 1.9)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_j8o8l"]
-viewport_path = NodePath("../Viewport")
+viewport_path = NodePath("")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_veqmd"]
 cull_mode = 2
@@ -26,13 +26,13 @@ scene = ExtResource("2")
 viewport_size = Vector2(1124, 776)
 update_mode = 2
 throttle_fps = 15.0
-transparent = 0
+transparent = 1
 alpha_scissor_threshold = 0.25
 unshaded = true
 filter = true
 
 [node name="Viewport" parent="." index="0"]
-transparent_bg = false
+transparent_bg = true
 size = Vector2i(1124, 776)
 
 [node name="Screen" parent="." index="1"]

@@ -1,3 +1,120 @@
+# VR Compagent Roadmap
+
+## Global feature inventory (all platforms)
+
+- **XR / VR rendering**
+  - Passthrough transparency enforcement (root + XR viewport)
+  - Passthrough environment cleanup (disable sky/environment layers)
+  - Anti-halo attempt: disable MSAA + enable FXAA when transparent passthrough active
+- **World-space UI**
+  - Viewport-in-3D UI panels (Display + VirtualKeyboard)
+  - UI drag interaction + pointer interaction
+- **Avatar**
+  - VRM avatar integration
+  - Floor anchoring (bottom-Y scan) + adjustable floor offset/scale
+  - Basic lighting fallback (key+fill) when scene is otherwise unlit
+- **Immersive Setup (room mapping)**
+  - One-at-a-time wizard (sofa/desk/bed)
+  - Cube-volume placeholders with glowing lid
+  - HEIGHT then AREA phases + persistence to `user://immersive_setup.cfg`
+- **Backend / AI stack (repo-level)**
+  - FastAPI + Ollama integration groundwork
+  - STT/TTS prototypes (fast-whisper + kokoro)
+  - Unity project present in repo (integration pending)
+
+## /godot (OpenXR)
+
+### Implemented
+
+- Passthrough robustness
+  - Root viewport + XR viewport forced `transparent_bg = true` early in `addons/godot-xr-tools/xr/start_xr.gd`
+  - Runtime enforcement in `code/godot/vrcompagent/scenes/demo_scene_base.gd`
+- Passthrough cleanup attempts
+  - Clear camera `environment` (staging sky) and any `WorldEnvironment.environment`
+  - Disable focus-dimmer overlay quad
+  - Disable MSAA + enable FXAA on main/root viewport when passthrough active
+- World-space UI
+  - Display + VirtualKeyboard via `XRToolsViewport2DIn3D`
+  - UI drag (grip press-edge), with rule: do not start UI drag when trigger is held
+  - Fix crash: raycast exclude uses panels’ `StaticBody3D` RIDs (no `get_rid()` on Node3D)
+- Avatar
+  - Basic key+fill lighting fallback if no `DirectionalLight3D` exists
+  - Feet-to-floor anchoring using avatar bottom-Y scan; adjustable floor offset/scale variables
+  - Collision isolation helper to stop avatar pushing other objects in certain modes
+- Immersive Setup (room mapping)
+  - One-at-a-time wizard (sofa/desk/bed)
+  - Cube-volume placeholder (semi-transparent sides + glowing lid)
+  - HEIGHT then AREA phases; trigger-modified stick controls; ConfigFile persistence
+
+### Current VR interaction snapshot (Jan 2026)
+
+- **Entry point / scene loading**
+  - Main scene is `demo_staging.tscn` which loads `res://scenes/baseline/vrcomp_minimal.tscn`.
+  - Most interaction logic lives in `res://scenes/demo_scene_base.gd`.
+
+- **Unified manipulation (single system)**
+  - XRTools physical pickup/collision-hands are disabled at runtime (to avoid stealing grip input and to prevent PlayerBody push-through-floor).
+  - Manipulation target acquisition uses a raycast from the active pointer and supports bodies + areas.
+  - Player rig is excluded from raycast targets.
+  - **Single-grip**: gripping hand stick controls the held target.
+    - Stick Y: push/pull (distance)
+    - Stick X: yaw spin
+    - Trigger (held) on the same hand: tilt mode (pitch/roll) for UI/avatar/liftable targets.
+  - **Double-grip**: reserved for two-hand pinch scaling of the currently manipulated target.
+
+- **Target categories / constraints**
+  - **UI (`Display` + `VirtualKeyboard`)**
+    - Hidden by default, toggled with left controller menu/meta button.
+    - Can be placed anywhere in the room and tilted.
+    - Treated as one object (always manipulates `Display` root so keyboard stays docked).
+    - UI transform + scale persisted to `user://ui_settings.cfg`.
+  - **Avatar**
+    - Can be lifted and tilted.
+    - On release it lands upright via `_land_object` (“cat lands on feet” behavior).
+  - **Floor-locked props** (default)
+    - Cannot be lifted; height is locked.
+    - Yaw only (upright).
+  - **Liftable props**
+    - Any object in group `liftable` is treated as a handheld prop: can lift + tilt.
+    - On release: no floor snapping; apply a mild upright-bias if only slightly tilted.
+    - If target is `RigidBody3D`, it is frozen during manipulation for stability and is forced to unfreeze on release so it drops with gravity.
+
+- **Stability / floor issues**
+  - Floor collisions are repaired at runtime even if a Floor exists in the scene (mask set to collide with PlayerBody).
+  - Manipulated targets have collisions suppressed during manipulation to prevent pushing/pulling the player.
+
+### Current known issues / next steps
+
+- **Dual-hand independent manipulation**
+  - Current manipulation is single-target global. Next step is to split state per hand so you can grip/manipulate two different objects simultaneously.
+  - When both hands select the same target, switch into two-hand pinch scaling for that target.
+
+- **Follow-gaze vs placed UI**
+  - If UI follow-gaze is ever re-enabled, ensure manual placement disables follow-gaze so the UI can remain parked on a wall/ceiling.
+
+- **Hand orientation polish**
+  - Runtime hand roll offset exists; may still need device-specific tuning.
+
+- **Passthrough outline/halo**
+  - Still a blocker; revisit XR/OpenXR rendering settings and vignette/foveation artifacts.
+
+### Current blockers
+
+- Passthrough “sharp black outline / backdrop shadow” around all geometry/UI
+- Input priority: avatar controls vs UI dragging (needs headset verification)
+
+## /unity
+
+- Planned: connect Unity VR client to FastAPI backend (WebSocket/HTTP)
+- Planned: avatar presentation + UI equivalents
+
+## /aframe
+
+- Planned: A-Frame/WebXR variant for lightweight web deployment
+
+---
+
+## Repo / backend roadmap (history)
 
 - [x] Repo structure setup (done)
 - [x] Git init, Gitignore (done)

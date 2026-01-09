@@ -1,0 +1,39 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://qkdlsb8r11ef"
+path.s3tc="res://.godot/imported/Joy-6fea143ebe95fd7e81aa89559e6e885c_FS_waistcoat_Normal.png-575b059ffcf3d5b8f3b557df1a3ad415.s3tc.ctex"
+path.etc2="res://.godot/imported/Joy-6fea143ebe95fd7e81aa89559e6e885c_FS_waistcoat_Normal.png-575b059ffcf3d5b8f3b557df1a3ad415.etc2.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "072ac85cb3c1258e6fda06212db16c5f"
+}
+
+[deps]
+
+source_file="res://assets/Fbx/Joy/Joy-6fea143ebe95fd7e81aa89559e6e885c_FS_waistcoat_Normal.png"
+dest_files=["res://.godot/imported/Joy-6fea143ebe95fd7e81aa89559e6e885c_FS_waistcoat_Normal.png-575b059ffcf3d5b8f3b557df1a3ad415.s3tc.ctex", "res://.godot/imported/Joy-6fea143ebe95fd7e81aa89559e6e885c_FS_waistcoat_Normal.png-575b059ffcf3d5b8f3b557df1a3ad415.etc2.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://assets/Fbx/Joy/Joy-6fea143ebe95fd7e81aa89559e6e885c_FS_waistcoat_Normal.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

@@ -32,6 +32,8 @@ var control_pad_hand : String = "LEFT"
 func _ready() -> void:
 	# In Godot 4 we must now manually call our super class ready function
 	super()
+	if has_node("StartXR"):
+		$StartXR.enable_passthrough = true
 
 
 func _on_Staging_scene_loaded(_scene, _user_data):

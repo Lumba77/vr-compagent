@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bt08qiog5e1ct"]
 
-[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="1_fgp5w"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://assets/objects/viewport_2d_in_3d.tscn" id="1_fgp5w"]
 [ext_resource type="PackedScene" uid="uid://d1i0fadwbjxr0" path="res://scenes/basic_movement_demo/objects/fade_instructions_2d.tscn" id="2_k6iih"]
 [ext_resource type="Material" uid="uid://cliyhjfvy8pfd" path="res://assets/maps/holodeck/materials/base.material" id="3_si8lj"]
 

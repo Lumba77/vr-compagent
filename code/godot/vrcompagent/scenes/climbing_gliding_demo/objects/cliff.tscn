@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bt8kw5a34upwm"]
 
-[ext_resource type="PackedScene" uid="uid://cjyilbm4ucc7s" path="res://addons/godot-xr-tools/objects/climbable.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cjyilbm4ucc7s" path="res://assets/objects/climbable.tscn" id="1"]
 [ext_resource type="Material" path="res://assets/wahooney.itch.io/brown_grid_triplanar.tres" id="2"]
 
 [sub_resource type="ConvexPolygonShape3D" id="2"]

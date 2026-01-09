@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cxytulli8pgww"]
 
-[ext_resource type="PackedScene" uid="uid://dsstvanwd58r0" path="res://addons/godot-xr-tools/objects/snap_path.tscn" id="2_1acgh"]
+[ext_resource type="PackedScene" uid="uid://dsstvanwd58r0" path="res://assets/objects/snap_path.tscn" id="2_1acgh"]
 [ext_resource type="AudioStream" uid="uid://bbe283racxu5y" path="res://assets/freesound/63529__florian_reinke__button_on.wav" id="2_40hmc"]
 [ext_resource type="PackedScene" uid="uid://bkogqfbreo3hb" path="res://assets/meshes/picatinny_rail/picatinny_30.glb" id="3_gx4ne"]
 [ext_resource type="Material" path="res://scenes/pickable_demo/materials/stand_metal.tres" id="4_742ay"]

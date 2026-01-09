@@ -1,3 +1,4 @@
 {
-    "continue.enableConsole": true
+  "continue.enableConsole": true,
+  "godotTools.editorPath.godot4": "c:\\Users\\lumba\\Program\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_win64.exe\\Godot_v4.2.2-stable_win64.exe"
 }

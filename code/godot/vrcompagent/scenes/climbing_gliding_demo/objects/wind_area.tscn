@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bt2i205mlq1q0"]
 
-[ext_resource type="PackedScene" uid="uid://nack1qite6lx" path="res://addons/godot-xr-tools/objects/wind_area.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://nack1qite6lx" path="res://assets/objects/wind_area.tscn" id="1"]
 [ext_resource type="Material" uid="uid://b5c8o7a55fyx5" path="res://scenes/climbing_gliding_demo/objects/wind_area_shader.tres" id="2"]
 
 [sub_resource type="CylinderShape3D" id="2"]
