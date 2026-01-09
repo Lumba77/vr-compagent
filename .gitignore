@@ -260,5 +260,11 @@ code/godot/vrcompagent/assets/Fbx/**/*.FBX.import
 code/godot/vrcompagent/assets/Fbx/**/*.Fbx.import
 code/godot/vrcompagent/assets/Fbx/**/*.res
 
+# Runtime-only avatars + GLB/VRM packages stay local (privacy + GitHub size limits)
+code/godot/vrcompagent/assets/Glb/**
+!code/godot/vrcompagent/assets/Glb/README.md
+code/godot/vrcompagent/vrm_samples/**/*.vrm
+!code/godot/vrcompagent/vrm_samples/README.md
+
 # OpenMemory - IDE/Assistant specific rules
 .windsurf\rules\openmemory.md
